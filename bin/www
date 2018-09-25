@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('easy-iot:server');
 var http = require('http');
-
+var mqtt=require('../mqtt');
 /**
  * Get port from environment and store in Express.
  */
@@ -20,7 +20,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
+mqtt.run();
 /**
  * Listen on provided port, on all network interfaces.
  */
