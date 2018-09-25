@@ -1,0 +1,29 @@
+{
+  "name": "easy-iot",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "less-middleware": "~2.2.1",
+    "morgan": "~1.9.0"
+  },
+  "description": "Easy IoT",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newbreach/easy-iot.git"
+  },
+  "author": "newbreach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/newbreach/easy-iot/issues"
+  },
+  "homepage": "https://github.com/newbreach/easy-iot#readme"
+}
