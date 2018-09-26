@@ -73,5 +73,38 @@ var messageHandler = function (topic, message) {
         console.error(ex);
     }
 };
+/**
+ * 发送数据（clientId）
+ * @param {String} productId
+ * @param {String} clientId 
+ * @param {Object} body 
+ */
+var sendWithClient = function (productId, clientId, body) {
+    if (client) {
+        let topic = `device/get/${productId}/${clientId}`;
+        client.publish(topic, JSON.stringify(body));
+    }
+};
 
-module.exports = { run, stop };
+/**
+ * 发送数据（topic）
+ * @param {String} topic 
+ * @param {Object} body 
+ */
+var sendWithTopic = function (topic, body) {
+    if (client) {
+        client.publish(topic, JSON.stringify(body));
+    }
+};
+
+module.exports = { run, stop, sendWithClient, sendWithTopic };
+
+
+//=======================TEST=============================
+
+// setInterval(function () {
+//     // console.log('test');
+//     sendWithClient('fish', 'b827eb540371', { type: 2001, message: new Date() });
+// }, 5000);
+
+//=======================END TEST=========================
