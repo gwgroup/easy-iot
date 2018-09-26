@@ -36,9 +36,6 @@ var run = function () {
         });
     });
     client.on("message", messageHandler);
-    client.on('error', function (err) {
-        console.error(err);
-    });
 };
 
 /**

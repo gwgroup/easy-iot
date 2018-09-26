@@ -5,9 +5,16 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('easy-iot:server');
+//var debug = require('debug')('easy-iot:server');
 var http = require('http');
-var mqtt=require('../mqtt');
+var mqtt = require('../mqtt');
+
+/**
+ * 初始化数据库连接
+ */
+var mconf= require('../config/index').mongodb;
+require('mongoose').connect(mconf.url,mconf.options);
+
 /**
  * Get port from environment and store in Express.
  */
@@ -86,5 +93,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  console.log('Listening on ' + bind);
 }
