@@ -21,6 +21,9 @@ const CONFIG = require('./config/index').mqtt,
  * 运行
  */
 var run = function () {
+    if (client) {
+        return;
+    }
     console.log("监听MQTT");
     client = mqtt.connect(CONFIG.url, CONFIG.options);
     client.on("connect", function () {
@@ -45,6 +48,7 @@ var stop = function () {
     console.log("断开MQTT连接");
     if (client) {
         client.end();
+        client = undefined;
     }
 };
 
