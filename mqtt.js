@@ -60,9 +60,9 @@ var stop = function () {
  */
 var messageHandler = function (topic, message) {
     try {
+        console.log(topic,message.toString('utf8'));
         let topicObj = util.parseTopic(topic),
             body = JSON.parse(message);
-        console.log(topicObj, body);
         serviceDeviceLog.insertDeviceLog(topicObj.product, topicObj.clientId, topicObj.type, body);
         switch (body.type) {
             case MESSAGE_TYPE_ONLINE:

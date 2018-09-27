@@ -13,8 +13,8 @@ var schedule = require('../schedule');
 /**
  * 初始化数据库连接
  */
-var mconf = require('../config/index').mongodb;
-require('mongoose').connect(mconf.url, mconf.options);
+var models=require('../models/index');
+models.initConnection();
 
 /**
  * Get port from environment and store in Express.

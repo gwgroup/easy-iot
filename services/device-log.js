@@ -8,11 +8,17 @@ var modelDeviceLog = require('../models').modelDeviceLog;
  * @param {Object} log 
  */
 var insertDeviceLog = function (productId, deviceId, topicType, log) {
-  modelDeviceLog.insertMany({ product: productId, device: deviceId, "topic_type": topicType, log: log },function(err,doc){
+  var entity=new modelDeviceLog({ product: productId, device: deviceId, "topic_type": topicType, log: log });
+  entity.save(function(err){
     if(err){
       console.error(err);
     }
   });
+  // modelDeviceLog.insertMany({ product: productId, device: deviceId, "topic_type": topicType, log: log },function(err,doc){
+  //   if(err){
+  //     console.error(err);
+  //   }
+  // });
 };
 
 
