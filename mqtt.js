@@ -5,7 +5,8 @@ var mqtt = require('mqtt'),
 //服务组件
 var serviceMqttUser = require('./services/mqtt-user'),
     serviceDevice = require('./services/device'),
-    serviceProduct = require('./services/product');
+    serviceProduct = require('./services/product'),
+    serviceDeviceLog = require('./services/device-log');
 //配置
 const CONFIG = require('./config/index').mqtt,
     //客户端发送消息主题
@@ -62,6 +63,7 @@ var messageHandler = function (topic, message) {
         let topicObj = util.parseTopic(topic),
             body = JSON.parse(message);
         console.log(topicObj, body);
+        serviceDeviceLog.insertDeviceLog(topicObj.product, topicObj.clientId, topicObj.type, body);
         switch (body.type) {
             case MESSAGE_TYPE_ONLINE:
                 serviceDevice.online(topicObj.clientId);
@@ -77,6 +79,7 @@ var messageHandler = function (topic, message) {
         console.error(ex);
     }
 };
+
 /**
  * 发送数据（clientId）
  * @param {String} productId

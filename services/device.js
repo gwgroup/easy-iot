@@ -5,7 +5,7 @@ var modelDevice = require('../models').modelDevice;
  * @param {String} clientId 
  */
 var findByClientId = function (clientId) {
-  modelDevice.findOne({ client_id: clientId }).populate('product').exec(function (err,result) {
+  modelDevice.findById(clientId).populate('product').exec(function (err,result) {
     if(err){
       console.error(err);
     }else{
@@ -19,7 +19,7 @@ var findByClientId = function (clientId) {
  * @param {String} clientId 
  */
 var online = function (clientId) {
-  modelDevice.findOneAndUpdate({ client_id: clientId }, { status: 1 }, function (err, doc) {
+  modelDevice.findByIdAndUpdate(clientId, { status: 1 }, function (err, doc) {
     if (err) {
       console.error('online', clientId, err);
     } else {
@@ -33,7 +33,7 @@ var online = function (clientId) {
  * @param {String} clientId 
  */
 var offline = function (clientId) {
-  modelDevice.findOneAndUpdate({ client_id: clientId }, { status: 0 }, function (err, doc) {
+  modelDevice.findByIdAndUpdate(clientId, { status: 0 }, function (err, doc) {
     if (err) {
       console.error('offline', clientId, err);
     } else {
