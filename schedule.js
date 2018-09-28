@@ -5,7 +5,7 @@ var tasks = [];
  * 启动调度
  */
 var run = function () {
-  console.log("初始化调度任务");
+  console.log("1.初始化Schedule服务");
   tasks.forEach((item) => {
     schedule.scheduleJob(item.name, item.cron, item.handler);
   });

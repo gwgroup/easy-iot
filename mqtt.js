@@ -25,19 +25,11 @@ var run = function () {
     if (client) {
         return;
     }
-    console.log("监听MQTT");
+    console.log("2.启动设备消息收发服务");
     client = mqtt.connect(CONFIG.url, CONFIG.options);
     client.on("connect", function () {
-        client.subscribe(SUB_TOPIC, { qos: 2, retain: false }, function (err) {
-            if (!err) {
-                console.log("订阅设备消息");
-            }
-        });
-        client.subscribe(LWT_TOPIC, { qos: 2, retain: false }, function (err) {
-            if (!err) {
-                console.log("订阅遗嘱消息");
-            }
-        });
+        client.subscribe(SUB_TOPIC, { qos: 2, retain: false });
+        client.subscribe(LWT_TOPIC, { qos: 2, retain: false });
     });
     client.on("message", messageHandler);
 };

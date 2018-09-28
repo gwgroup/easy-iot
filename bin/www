@@ -7,20 +7,22 @@
 var app = require('../app');
 //var debug = require('debug')('easy-iot:server');
 var http = require('http');
-var mqtt = require('../mqtt');
-var schedule = require('../schedule');
+var webPort=require('../config').webPort;
 
 /**
- * 初始化数据库连接
+ * 1.初始化数据库连接
+ * 2.运行调度
+ * 3.运行MQTT数据订阅
  */
-var models=require('../models/index');
-models.initConnection();
+require('../models/index').initConnection();
+require('../schedule').run();
+require('../mqtt').run();
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || webPort);
 app.set('port', port);
 
 /**
@@ -28,8 +30,6 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-mqtt.run();
-schedule.run();
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -96,5 +96,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? ' ' + addr
     : '端口 ' + addr.port;
-  console.log('WEB ' + bind);
+  console.log('3.Express启动 ' + bind);
 }
