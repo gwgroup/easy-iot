@@ -106,4 +106,11 @@ module.exports = { run, stop, sendWithClient, sendWithTopic };
 //     sendWithClient('fish', 'b827eb540371', { type: 2001, message: new Date() });
 // }, 5000);
 
+
+//===================TEST====================
+
+// util.sms.sendSMS(['18616514687'],util.sms.templates.regedit,['890123','9'],function(r1){
+//   console.log(r1);
+// });
+
 //=======================END TEST=========================
