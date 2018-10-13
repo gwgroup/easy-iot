@@ -99,7 +99,7 @@ async.waterfall([
         console.log('添加 18616514687');
         model.modelUsers({
             "mobile": "18616514687",
-            "password": "",
+            "password": util.safe.generatePBKDF2('123456'),
             "role": "admin",
             "display_name": "李群朋",
             "create_time": new Date(),
