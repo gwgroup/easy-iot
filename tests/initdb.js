@@ -58,31 +58,63 @@ async.waterfall([
         });
     },
     function (q, cb) {
-        console.log('添加 admin 角色');
+        console.log('添加 平台(platform) 角色');
         model.modelRole({
-            "_id": "admin",
+            "_id": "platform",
             "name": "管理员",
             "create_time": new Date(),
             "update_time": new Date(),
             "menu": {
                 "name": "主页",
-                "path": "/",
+                "path": "/platform",
                 "child": [
                     {
                         "name": "客户认证审核",
-                        "path": "/audit"
+                        "path": "/platform/audit"
                     },
                     {
                         "name": "设备查看",
-                        "path": "/device"
+                        "path": "/platform/device"
                     },
                     {
                         "name": "产品查看",
-                        "path": "/product"
+                        "path": "/platform/product"
                     },
                     {
                         "name": "监控",
-                        "path": "/monitor"
+                        "path": "/platform/monitor"
+                    }
+                ]
+            }
+        }).save(function (err, doc) {
+            cb(err, doc);
+        });
+    },
+    function (q, cb) {
+        console.log('添加 客户（customer）角色');
+        model.modelRole({
+            "_id": "customer",
+            "name": "客户",
+            "create_time": new Date(),
+            "update_time": new Date(),
+            "menu": {
+                "name": "主页",
+                "path": "/customer",
+                "child": [
+                    {
+                        "name": "我的产品",
+                        "path": "/customer/product"
+                    },
+                    {
+                        "name": "设备管理",
+                        "path": "/customer/device"
+                    },
+                    {
+                        "name": "设备监控",
+                        "path": "/customer/monitor"
+                    }, {
+                        "name": "固件升级",
+                        "path": "/customer/upgrade"
                     }
                 ]
             }
@@ -100,7 +132,7 @@ async.waterfall([
         model.modelUsers({
             "mobile": "18616514687",
             "password": util.safe.generatePBKDF2('123456'),
-            "role": "admin",
+            "role": "platform",
             "display_name": "李群朋",
             "create_time": new Date(),
             "update_time": new Date()
