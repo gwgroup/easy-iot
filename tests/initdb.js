@@ -2,9 +2,25 @@ require('../models').initConnection();
 var async = require('async');
 var util = require('../util');
 var model = require('../models');
-
+const ObjectId = require('mongoose').Types.ObjectId;
+let fishUserID= ObjectId();
 async.waterfall([
-    function (cb) {
+    (cb)=>{
+        console.log('清除所有产品');
+        model.modelProduct.deleteMany({},function(err,doc){
+            cb(err,doc);
+        });
+    },
+    function (q,cb) {
+        console.log('创建产品 fish');
+        model.modelProduct({
+            _id:'fish',
+            name: '云水族',
+            desc: '',
+            customer: fishUserID
+        }).save(cb);
+    },
+    function (q,cb) {
         console.log('移除所有MQTT用户');
         model.modelMqttUsers.deleteMany({}, function (err, doc) {
             cb(err, doc);
@@ -128,18 +144,34 @@ async.waterfall([
             cb(err, doc);
         });
     }, function (q, cb) {
-        console.log('添加 18616514687');
+        console.log('添加 admin（平台角色）用户');
         model.modelUsers({
-            "mobile": "18616514687",
+            "username": "admin",
             "password": util.safe.generatePBKDF2('123456'),
             "role": "platform",
-            "display_name": "李群朋",
+            "display_name": "管理员",
             "create_time": new Date(),
             "update_time": new Date()
         }).save(function (err, doc) {
             cb(err, doc);
         })
-    }, function (q, cb) {
+    },
+    (q, cb) => {
+        console.log('添加 18616514687 （客户角色）用户');
+        model.modelUsers({
+            _id:fishUserID,
+            "mobile": "18616514687",
+            "username": "fish",
+            "password": util.safe.generatePBKDF2('123456'),
+            "role": "customer",
+            "display_name": "云水族",
+            "create_time": new Date(),
+            "update_time": new Date()
+        }).save(function (err, doc) {
+            cb(err, doc);
+        });
+    },
+    function (q, cb) {
         console.log('测试加载输出 18616514687 用户');
         model.modelUsers.findOne({ mobile: '18616514687' }).populate('role').exec(function (err, doc) {
             console.info(doc);

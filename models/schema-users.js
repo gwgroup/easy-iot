@@ -1,7 +1,8 @@
 const Schema = require('mongoose').Schema;
 
 var usersSchema = new Schema({
-  mobile: { type: String, unique: true },
+  mobile: { type: String },
+  username: { type: String, unique: true },
   display_name: String,
   password: String,
   role: { type: String, ref: 'role' },

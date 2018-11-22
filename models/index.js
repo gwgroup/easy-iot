@@ -21,6 +21,7 @@ var modelRole = mongoose.model('role', schemaRole, 'role');
 var initConnection = function () {
   mongoose.connect(mongoConfig.url, mongoConfig.options);
   mongoose.set('useFindAndModify', false);
+  return this;
 };
 
 module.exports = { modelDevice, modelProduct, modelDeviceLog, modelMqttUsers, modelUsers, modelRole, initConnection };
