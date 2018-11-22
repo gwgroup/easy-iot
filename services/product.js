@@ -19,7 +19,7 @@ var find = function (queryString, customer, pageIndex, pageSize, cb) {
     if (customer) {
         qparams.customer = customer;
     }
-    modelProduct.find(qparams).populate('customer').skip(pageIndex - 1 * pageSize).limit(pageSize).exec(cb);
+    modelProduct.find(qparams).populate('customer',['username','mobile','display_name']).skip(pageIndex - 1 * pageSize).limit(pageSize).exec(cb);
 };
 /**
  * 加载
@@ -27,6 +27,6 @@ var find = function (queryString, customer, pageIndex, pageSize, cb) {
  * @param {Function} cb
  */
 var load = function (id, cb) {
-    modelProduct.findById(id, cb);
+    modelProduct.findById(id).populate('customer',['username','mobile','display_name']).findOne(cb);
 };
 module.exports = { find, load };
