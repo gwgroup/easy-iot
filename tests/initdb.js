@@ -3,24 +3,24 @@ var async = require('async');
 var util = require('../util');
 var model = require('../models');
 const ObjectId = require('mongoose').Types.ObjectId;
-let fishUserID= ObjectId();
+let fishUserID = ObjectId();
 async.waterfall([
-    (cb)=>{
+    (cb) => {
         console.log('清除所有产品');
-        model.modelProduct.deleteMany({},function(err,doc){
-            cb(err,doc);
+        model.modelProduct.deleteMany({}, function (err, doc) {
+            cb(err, doc);
         });
     },
-    function (q,cb) {
+    function (q, cb) {
         console.log('创建产品 fish');
         model.modelProduct({
-            _id:'fish',
+            _id: 'fish',
             name: '云水族',
             desc: '',
             customer: fishUserID
         }).save(cb);
     },
-    function (q,cb) {
+    function (q, cb) {
         console.log('移除所有MQTT用户');
         model.modelMqttUsers.deleteMany({}, function (err, doc) {
             cb(err, doc);
@@ -146,9 +146,11 @@ async.waterfall([
     }, function (q, cb) {
         console.log('添加 admin（平台角色）用户');
         model.modelUsers({
+            "email":"newbreach@live.com",
             "username": "admin",
             "password": util.safe.generatePBKDF2('123456'),
             "role": "platform",
+            "active": true,
             "display_name": "管理员",
             "create_time": new Date(),
             "update_time": new Date()
@@ -159,11 +161,13 @@ async.waterfall([
     (q, cb) => {
         console.log('添加 18616514687 （客户角色）用户');
         model.modelUsers({
-            _id:fishUserID,
+            _id: fishUserID,
+            "email":"newbreach@live.cn",
             "mobile": "18616514687",
             "username": "fish",
             "password": util.safe.generatePBKDF2('123456'),
             "role": "customer",
+            "active": true,
             "display_name": "云水族",
             "create_time": new Date(),
             "update_time": new Date()

@@ -1,5 +1,6 @@
 var sms = require('./sms');
 var safe = require('./safe');
+var email=require('./email');
 /**
  * 解析主题
  * @param {String} topic 
@@ -9,6 +10,6 @@ var parseTopic = function (topic) {
   return { product: r[2], clientId: r[3], type: r[1] };
 };
 module.exports = {
-  parseTopic, sms, safe
+  parseTopic, sms, safe,email
 };
 
