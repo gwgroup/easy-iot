@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var productService = require('../services/product');
+var productService = require('../../services/product');
 /* 查询产品 */
 router.post('/find', function (req, res, next) {
     let { queryString, customerId, pageIndex, pageSize } = req.body;

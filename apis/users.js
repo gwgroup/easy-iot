@@ -5,7 +5,7 @@ router.post('/login', function (req, res, next) {
   res.send('login');
 });
 
-router.post('/regedit', function (req, res, next) {
+router.post('/regedit_customer', function (req, res, next) {
   userService.regeditCustomerUser(req.body, (err, result) => {
     if (err) {
       return next(err);
@@ -14,12 +14,12 @@ router.post('/regedit', function (req, res, next) {
   });
 });
 
-router.post('/change_password', function (req, res, next) {
-  res.send('change password');
-});
+// router.post('/change_password', function (req, res, next) {
+//   res.send('change password');
+// });
 
-router.post('/update', function (req, res, next) {
-  res.send('update');
-});
+// router.post('/update', function (req, res, next) {
+//   res.send('update');
+// });
 
 module.exports = router;

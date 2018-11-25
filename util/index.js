@@ -9,7 +9,15 @@ var parseTopic = function (topic) {
   var r = topic.split('/');
   return { product: r[2], clientId: r[3], type: r[1] };
 };
+
+class BusinessError extends Error{
+  constructor(code,message){
+    this.code=code;
+    super(message);
+  }
+}
+
 module.exports = {
-  parseTopic, sms, safe,email
+  parseTopic, sms, safe,email,BusinessError
 };
 
