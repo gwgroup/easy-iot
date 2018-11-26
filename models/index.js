@@ -1,19 +1,19 @@
-var mongoConfig = require('../config/index').mongodb;
-const mongoose = require('mongoose'),
+const mongoConfig = require('../config/index').mongodb,
+  mongoose = require('mongoose'),
   schemaDevice = require('./schema-device'),
   schemaProduct = require('./schema-product'),
   schemaDeviceLog = require('./schema-device-log'),
-  schemaMqttUsers = require('./schema-mqtt-users');
-schemaUsers = require('./schema-users');
-schemaRole = require('./schema-role');
-var modelDevice = mongoose.model('device', schemaDevice, 'device');
-var modelDeviceLog = mongoose.model('device_log', schemaDeviceLog, 'device_log');
-var modelProduct = mongoose.model('product', schemaProduct, 'product');
-var modelMqttUsers = mongoose.model('mqtt_users', schemaMqttUsers, 'mqtt_users');
-var modelUsers = mongoose.model('users', schemaUsers, 'users');
-var modelRole = mongoose.model('role', schemaRole, 'role');
-
-
+  schemaMqttUsers = require('./schema-mqtt-users'),
+  schemaUsers = require('./schema-users'),
+  schemaRole = require('./schema-role');
+schemaToken = require('./schema-token');
+var modelDevice = mongoose.model('device', schemaDevice, 'device'),
+  modelDeviceLog = mongoose.model('device_log', schemaDeviceLog, 'device_log'),
+  modelProduct = mongoose.model('product', schemaProduct, 'product'),
+  modelMqttUsers = mongoose.model('mqtt_users', schemaMqttUsers, 'mqtt_users'),
+  modelUsers = mongoose.model('users', schemaUsers, 'users'),
+  modelRole = mongoose.model('role', schemaRole, 'role'),
+  modelToken = mongoose.model('token', schemaToken, 'token');
 
 /**
  * 初始化Mongoose连接
@@ -24,4 +24,4 @@ var initConnection = function () {
   return this;
 };
 
-module.exports = { modelDevice, modelProduct, modelDeviceLog, modelMqttUsers, modelUsers, modelRole, initConnection };
+module.exports = { modelDevice, modelProduct, modelDeviceLog, modelMqttUsers, modelUsers, modelRole, initConnection, modelToken };
